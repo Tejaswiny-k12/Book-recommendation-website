@@ -3,88 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Password Manager</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <title>Register page</title>
+    <script src="script.js" defer></script>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #1E1E2D;
+            font-family: Arial, sans-serif;
+        }
+        .login-container {
+            background-color: #252545;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            width: 300px;
+            color: white;
+        }
+        .login-container h2 {
+            margin-bottom: 20px;
+        }
+        .login-container input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+        }
+        .login-container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #00A3FF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .login-container a {
+            color: #00A3FF;
+            text-decoration: none;
+            display: block;
+            margin-top: 10px;
+        } 
+    </style>
+
 </head>
 <body>
-    <div class="container">
-        <div class="app-container">
-            <div class="app-header">
-                <h1>Password Manager</h1>
-                <button id="theme-toggle" class="theme-toggle">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="moon"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="sun"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="m4.93 4.93 1.41 1.41"></path><path d="m17.66 17.66 1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="m6.34 17.66-1.41 1.41"></path><path d="m19.07 4.93-1.41 1.41"></path></svg>
-                </button>
-            </div>
-
-            <!-- Login Section -->
-            <div id="login-section" class="section">
-                <h2>Login to Your Password Manager</h2>
-                <form id="login-form">
-                    <div class="form-group">
-                        <label for="master-password">Master Password</label>
-                        <input type="password" id="master-password" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Login</button>
-                </form>
-                <p id="login-message" class="message"></p>
-                <p class="info-text">First time? Just enter a master password to create your account.</p>
-            </div>
-
-            <!-- Dashboard Section -->
-            <div id="dashboard-section" class="section hidden">
-                <div class="dashboard-header">
-                    <h2>Your Passwords</h2>
-                    <button id="add-password-btn" class="btn btn-primary">Add New</button>
-                    <button id="logout-btn" class="btn btn-secondary">Logout</button>
-                </div>
-                
-                <div class="search-container">
-                    <input type="text" id="search-input" placeholder="Search passwords...">
-                </div>
-                
-                <div id="passwords-list" class="passwords-list">
-                    <!-- Passwords will be displayed here -->
-                    <p id="no-passwords-message">No passwords saved yet. Add your first password using the button above.</p>
-                </div>
-            </div>
-
-            <!-- Add/Edit Password Form -->
-            <div id="password-form-section" class="section hidden">
-                <h2 id="form-title">Add New Password</h2>
-                <form id="password-form">
-                    <input type="hidden" id="edit-id">
-                    <div class="form-group">
-                        <label for="site-name">Site Name</label>
-                        <input type="text" id="site-name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="username">Username/Email</label>
-                        <input type="text" id="username" required>
-                    </div>
-                    <div class="form-group password-input-group">
-                        <label for="password">Password</label>
-                        <div class="password-field">
-                            <input type="password" id="password" required>
-                            <button type="button" id="toggle-password" class="toggle-password">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="notes">Notes (Optional)</label>
-                        <textarea id="notes"></textarea>
-                    </div>
-                    <div class="form-buttons">
-                        <button type="submit" class="btn btn-primary">Save</button>
-                        <button type="button" id="cancel-btn" class="btn btn-secondary">Cancel</button>
-                    </div>
-                </form>
-            </div>
-        </div>
+    
+    <div class="login-container">
+        <h2>Register</h2>
+        <form action="process.php" method="POST">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" placeholder="Enter your username" required>
+            
+            <label for="email">Email ID</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+            
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Enter your password" required>
+            
+            <a href="signin.html">login?</a>
+            <br>
+            <button type="submit">Sign up</button>
+           
+        </form>
     </div>
-
-    <script src="script.js"></script>
 </body>
 </html>
